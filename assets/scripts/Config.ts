@@ -3,6 +3,7 @@ export class Config {
     public static isPassLevel = false;
     public static complateCount = 0;
     public static levelIndex = 0;
+    public static x_length = 0;
 
     public static levelData = {
         level_0: [[0,0,0],[0,1,0],[0,0,0]],

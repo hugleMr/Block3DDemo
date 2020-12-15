@@ -1,4 +1,5 @@
 import { _decorator, Component, Node, systemEvent, SystemEventType, geometry, CameraComponent, PhysicsSystem, Layers } from 'cc';
+import { Config } from './Config';
 import { CubeNode } from './CubeNode';
 const { ccclass, property } = _decorator;
 
@@ -13,11 +14,14 @@ export class CameraCtl extends Component {
     }
 
     _touchStart(touch,event){
+        if(!Config.canClick || Config.isPassLevel){
+            return;
+        }
         let camera = this.node.getComponent(CameraComponent);
         camera.screenPointToRay(touch._point.x, touch._point.y, this._ray);
         let result = PhysicsSystem.instance.raycastClosest(this._ray, -1, this._maxDistance,false);
-        const r = PhysicsSystem.instance.raycastClosestResult.collider;
         if(result){
+            const r = PhysicsSystem.instance.raycastClosestResult.collider;
             r.node.getComponent(CubeNode).changeScale();
         }
     }

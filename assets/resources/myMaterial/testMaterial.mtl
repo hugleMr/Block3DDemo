@@ -8,14 +8,8 @@
   },
   "_techIdx": 0,
   "_defines": [
-    {
-      "USE_NORMAL_MAP": true,
-      "USE_EMISSIVE_MAP": true
-    },
-    {
-      "USE_NORMAL_MAP": true,
-      "USE_EMISSIVE_MAP": true
-    },
+    {},
+    {},
     {}
   ],
   "_states": [
@@ -49,18 +43,19 @@
   ],
   "_props": [
     {
-      "emissive": {
+      "mainColor": {
         "__type__": "cc.Color",
-        "r": 77,
-        "g": 77,
-        "b": 77,
+        "r": 213,
+        "g": 203,
+        "b": 203,
         "a": 255
       },
-      "normalMap": {
-        "__uuid__": "66fe5b77-85c2-4f38-80cc-0c5b6828e295@6c48a"
-      },
-      "emissiveMap": {
-        "__uuid__": "66fe5b77-85c2-4f38-80cc-0c5b6828e295@6c48a"
+      "emissive": {
+        "__type__": "cc.Color",
+        "r": 119,
+        "g": 102,
+        "b": 102,
+        "a": 255
       }
     },
     {},

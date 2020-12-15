@@ -5,12 +5,6 @@ const { ccclass, property } = _decorator;
 
 @ccclass('LevelNode')
 export class LevelNode extends Component {
-    /* class member could be defined like this */
-    // dummy = '';
-
-    /* use `property` decorator if your want the member to be serializable */
-    // @property
-    // serializableDummy = 0;
     @property(Prefab)
     cubeNode = null;
 
@@ -36,13 +30,13 @@ export class LevelNode extends Component {
         let levelData = Config.levelData['level_' + Config.levelIndex];
         let x_mid = Math.floor(levelData[0].length/2);
         let y_mid = Math.floor(levelData.length/2);
-
+        Config.x_length = levelData[0].length;
         for(let i = 0; i < levelData.length; i++){
             for(let j = 0; j < levelData[i].length; j++){
                 if(levelData[i][j] != 0){
                     let x = j - x_mid;
                     let z = i - y_mid;
-                    let index = i * levelData[0].length * j;
+                    let index = i * Config.x_length + j;
                     let node = instantiate(this.cubeNode);
                     node.parent = this.node;
                     node.position = new Vec3(x,0.4,z);
@@ -59,13 +53,13 @@ export class LevelNode extends Component {
     changeComplate(num){
         this.complateCount += num;
         if(Config.complateCount >= this.childArr.length && !Config.isPassLevel){
-            console.log('--------------过关', Config.levelIndex);
+            console.log('--------------', Config.levelIndex);
             Config.levelIndex++;
-            if(Config.levelIndex >= 29)Config.levelIndex = 8 + Math.floor(Math.random()*21);
-           this.scheduleOnce(this.removeChildArr, 1);
-           Config.isPassLevel = true;
-           sys.localStorage.setItem('levelIndex', Config.levelIndex);
-        //    window.Notification.emit('passLevel');
+            if(Config.levelIndex >= 29) Config.levelIndex = 8 + Math.floor(Math.random()*21);
+            this.scheduleOnce(this.removeChildArr, 1);
+            Config.isPassLevel = true;
+            sys.localStorage.setItem('levelIndex', Config.levelIndex);
+            this.node.parent.emit("passLevel");
         }
     }
 
